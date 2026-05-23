@@ -106,12 +106,12 @@ export function HomeScreen() {
         <div className="w-full max-w-6xl mt-8 relative z-20">
           <OrbitCarousel 
             items={[
-               { img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070", title: "Data Analytics" },
-               { img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000", title: "Abstract UI" },
-               { img: "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=2000", title: "Finance Logic" },
-               { img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2000", title: "Smart Tech" },
-               { img: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070", title: "Code Platform" },
-               { img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070", title: "Team Collaboration" },
+               { img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070", title: "Data Analytics", description: "Actionable insights from user behavior, revenue trends, and operational health." },
+               { img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000", title: "Abstract UI", description: "Themed interface systems built for clarity, motion, and brand-forward presentation." },
+               { img: "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=2000", title: "Finance Logic", description: "Secure fintech dashboards and intelligent workflows for modern financial teams." },
+               { img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2000", title: "Smart Tech", description: "Connected product experiences blending automation, IoT, and responsive data surfaces." },
+               { img: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070", title: "Code Platform", description: "Developer-centric tooling that streamlines engineering delivery and shared collaboration." },
+               { img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070", title: "Team Collaboration", description: "Real-time planning and communication tools that keep distributed teams aligned." },
             ]}
             title={<h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight opacity-90">Featured <span className="text-sky-400">Projects</span></h2>}
           />

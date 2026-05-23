@@ -16,7 +16,7 @@ export function ServiceScreen() {
   } as const;
 
   return (
-      <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} className="pb-12 px-6 md:px-12 max-w-7xl mx-auto space-y-8 h-full flex flex-col justify-center min-h-[80vh]">
+      <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} className="pb-12 px-4 sm:px-6 md:px-10 lg:px-12 max-w-7xl mx-auto space-y-10 h-full flex flex-col justify-center min-h-[80vh]">
         <div className="flex flex-col md:flex-row gap-6 items-center pt-6 relative w-full mb-6">
           <div className="space-y-4 max-w-xl text-center md:text-left flex-1">
             <motion.h1 variants={itemVariants} className="text-5xl lg:text-7xl font-bold text-white tracking-tight drop-shadow-sm">Our <span className="text-sky-400">Services</span></motion.h1>
@@ -44,12 +44,12 @@ export function ServiceScreen() {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[320px]">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 auto-rows-[320px]">
           <ServiceCard 
             icon={<Monitor size={40} />} 
             title="Web Development" 
             desc="Responsive and scalable web applications built using modern frameworks like React, Next.js, and Tailwind CSS." 
-            className="md:col-span-2  border border-sky-100"
+            className="lg:col-span-2 border border-sky-100"
             img="https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=1000"
           />
           <ServiceCard 

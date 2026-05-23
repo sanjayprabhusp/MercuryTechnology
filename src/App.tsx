@@ -48,24 +48,24 @@ export default function App() {
       
       <Header currentScreen={currentScreen} onNavigate={scrollToSection} />
 
-      <main className="relative w-full">
-        <section id="home" className="min-h-screen pt-20 flex flex-col justify-center">
+      <main className="relative w-full px-4 sm:px-6 lg:px-8">
+        <section id="home" className="min-h-[calc(100vh-80px)] pt-24 sm:pt-28 flex flex-col justify-center">
            <HomeScreen />
         </section>
-        <section id="service" className="min-h-screen pt-20 pb-20">
+        <section id="service" className="min-h-[calc(100vh-80px)] pt-24 sm:pt-28 pb-20">
            <ServiceScreen />
         </section>
-        <section id="product" className="min-h-screen pt-20 pb-20">
+        <section id="product" className="min-h-[calc(100vh-80px)] pt-24 sm:pt-28 pb-20">
            <ProductScreen />
         </section>
         <FloatingLogoRing />
-        <section id="about" className="min-h-screen pt-20 pb-20">
+        <section id="about" className="min-h-[calc(100vh-80px)] pt-24 sm:pt-28 pb-20">
            <AboutScreen />
         </section>
-        <section id="employees" className="min-h-screen pt-20 pb-20">
+        <section id="employees" className="min-h-[calc(100vh-80px)] pt-24 sm:pt-28 pb-20">
            <EmployeeScreen />
         </section>
-        <section id="contact" className="min-h-screen pt-20 pb-20">
+        <section id="contact" className="min-h-[calc(100vh-80px)] pt-24 sm:pt-28 pb-20">
            <ContactScreen />
         </section>
       </main>
