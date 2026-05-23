@@ -14,9 +14,9 @@ const itemVariants = {
 export function ProductScreen() {
   return (
     <motion.div variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.15 }} className="px-6 md:px-12 max-w-7xl mx-auto space-y-10 pb-16">
-      <div className="relative overflow-hidden rounded-[2.5rem] border border-sky-500/10 bg-slate-950/80 p-8 md:p-10 shadow-[0_35px_120px_rgba(14,165,233,0.15)]">
-        <div className="pointer-events-none absolute -left-20 top-10 h-44 w-44 rounded-full bg-sky-500/10 blur-3xl" />
-        <div className="pointer-events-none absolute right-0 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-sky-400/10 blur-3xl" />
+      <div className="relative overflow-hidden rounded-[2.5rem] border border-sky-500/10 bg-slate-950/80 p-8 md:p-10 shadow-[0_25px_80px_rgba(14,165,233,0.1)]">
+        <div className="pointer-events-none absolute -left-20 top-10 h-44 w-44 rounded-full bg-sky-500/10 blur-2xl" />
+        <div className="pointer-events-none absolute right-0 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-sky-400/10 blur-2xl" />
         <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr] items-center">
           <motion.div variants={itemVariants} className="space-y-6">
             <div className="inline-flex items-center rounded-full border border-sky-500/20 bg-sky-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-sky-200">Product Innovation</div>
@@ -82,9 +82,9 @@ export function ProductScreen() {
 function ProductSection({ title, desc, items, img }: { title: string; desc?: string; items?: { title: string; desc: string }[]; img?: string }) {
   return (
     <motion.div variants={itemVariants} className="relative">
-      <SpotlightCard className="relative overflow-hidden border border-sky-400/10 bg-slate-950/80 backdrop-blur-xl p-8 md:p-12 rounded-[2.5rem] shadow-[0_32px_120px_rgba(14,165,233,0.12)] transition-all duration-300 hover:shadow-[0_40px_140px_rgba(14,165,233,0.18)]">
-        <div className="pointer-events-none absolute -left-20 -top-16 h-44 w-44 rounded-full bg-sky-500/10 blur-3xl" />
-        <div className="pointer-events-none absolute -right-14 bottom-12 h-56 w-56 rounded-full bg-sky-400/10 blur-3xl" />
+      <SpotlightCard className="relative overflow-hidden border border-sky-400/10 bg-slate-950/80 backdrop-blur-lg p-8 md:p-12 rounded-[2.5rem] shadow-[0_22px_80px_rgba(14,165,233,0.08)] transition-all duration-300 hover:shadow-[0_30px_100px_rgba(14,165,233,0.12)]">
+        <div className="pointer-events-none absolute -left-20 -top-16 h-44 w-44 rounded-full bg-sky-500/10 blur-2xl" />
+        <div className="pointer-events-none absolute -right-14 bottom-12 h-56 w-56 rounded-full bg-sky-400/10 blur-2xl" />
 
         <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] items-start relative z-10">
           <div className="space-y-6">
@@ -110,11 +110,10 @@ function ProductSection({ title, desc, items, img }: { title: string; desc?: str
             {items.map((item, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 28, scale: 0.96 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.45, ease: 'easeOut', delay: idx * 0.08 }}
-                whileHover={{ y: -8, scale: 1.02 }}
+                transition={{ duration: 0.35, ease: 'easeOut', delay: idx * 0.06 }}
                 className="relative"
               >
                 <div className="absolute -left-4 -top-6 h-24 w-24 rounded-full bg-sky-500/10 blur-3xl" />

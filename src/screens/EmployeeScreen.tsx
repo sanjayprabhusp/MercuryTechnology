@@ -9,8 +9,8 @@ const containerVariants = {
 } as const;
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 20, rotateX: 12 },
-  show: { opacity: 1, y: 0, rotateX: 0, transition: { type: 'spring', stiffness: 110, damping: 18 } }
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } }
 } as const;
 
 const femaleFirstNames = new Set([
@@ -79,9 +79,8 @@ export function EmployeeScreen() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {employees.map((emp, i) => (
-            <motion.div key={emp.id} variants={cardVariants} style={{ perspective: 1100 }}>
-              <motion.div whileHover={{ rotateY: 10, rotateX: 3, translateZ: 10, scale: 1.02 }} transition={{ duration: 0.22 }} style={{ transformStyle: 'preserve-3d' }}>
-                <SpotlightCard className="group relative bg-slate-950/85 backdrop-blur-xl border border-sky-400/10 rounded-[2rem] p-6 overflow-hidden shadow-[0_30px_80px_rgba(14,165,233,0.12)] transition-all duration-300 hover:shadow-[0_40px_90px_rgba(14,165,233,0.22)] h-full">
+            <motion.div key={emp.id} variants={cardVariants}>
+              <SpotlightCard className="group relative bg-slate-950/85 backdrop-blur-lg border border-sky-400/10 rounded-[2rem] p-6 overflow-hidden shadow-[0_20px_60px_rgba(14,165,233,0.08)] transition-all duration-300 hover:shadow-[0_30px_70px_rgba(14,165,233,0.12)] h-full hover:scale-105">
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(56,189,248,0.18),_transparent_25%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.14),_transparent_20%)]" />
                   <div className="absolute right-6 top-6 h-24 w-24 rounded-full bg-sky-500/10 blur-3xl" />
                   <div className="absolute left-6 bottom-6 h-32 w-32 rounded-full bg-sky-400/10 blur-3xl" />
@@ -118,7 +117,6 @@ export function EmployeeScreen() {
                     </div>
                   </div>
                 </SpotlightCard>
-              </motion.div>
             </motion.div>
           ))}
         </div>

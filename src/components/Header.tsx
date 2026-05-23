@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { motion } from 'motion/react';
 import { ScreenName } from '../types';
 
@@ -8,49 +8,19 @@ interface HeaderProps {
 }
 
 const NavButton: React.FC<{ tab: { id: ScreenName; label: string }; isActive: boolean; onClick: () => void }> = ({ tab, isActive, onClick }) => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const buttonRef = useRef<HTMLButtonElement>(null);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!buttonRef.current) return;
-    const rect = buttonRef.current.getBoundingClientRect();
-    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-  };
-
    return (
     <motion.button
      type="button"
-     ref={buttonRef}
-     onMouseMove={handleMouseMove}
      onClick={onClick}
-     whileHover={{ y: -2, scale: 1.02 }}
-     whileTap={{ scale: 0.98 }}
-     transition={{ duration: 0.22 }}
+     whileHover={{ y: -1, scale: 1.01 }}
+     whileTap={{ scale: 0.99 }}
+     transition={{ duration: 0.15 }}
      aria-current={isActive ? 'page' : undefined}
-     className={`relative px-5 py-2 text-sm font-semibold rounded-full overflow-hidden transition-all duration-300 group border backdrop-blur-sm ${
-       isActive ? 'text-white border-sky-400/50' : 'text-slate-300 hover:text-white hover:bg-white/10 border-white/10 hover:border-white/20'
+     className={`relative px-4 py-2 text-sm font-semibold rounded-full overflow-hidden transition-colors duration-150 will-change-transform ${
+       isActive ? 'text-white bg-sky-500/25 border border-sky-400/40' : 'text-slate-300 hover:text-white hover:bg-white/5 border border-white/10'
      }`}
    >
-      <div 
-        className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100"
-        style={{
-          background: `radial-gradient(40px circle at ${position.x}px ${position.y}px, rgba(255, 255, 255, 0.8), transparent 40%)`
-        }}
-      />
-      <div 
-        className="pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100"
-        style={{
-          background: `radial-gradient(40px circle at ${position.x}px ${position.y}px, rgba(255, 255, 255, 0.1), transparent 40%)`
-        }}
-      />
-     {isActive && (
-       <motion.div
-         layoutId="active-pill"
-         className="absolute inset-0 bg-gradient-to-b from-sky-500/40 to-sky-500/20 border border-sky-300/50 rounded-full shadow-lg shadow-sky-500/20 backdrop-blur-sm"
-         transition={{ type: 'spring', duration: 0.6, bounce: 0.2 }}
-       />
-     )}
-     <span className="relative z-10 transition-colors duration-300">{tab.label}</span>
+     <span className="relative z-10">{tab.label}</span>
    </motion.button>
   );
 }
@@ -67,14 +37,14 @@ export function Header({ currentScreen, onNavigate }: HeaderProps) {
 
   return (
     <motion.header
-      initial={{ y: -40, opacity: 0 }}
+      initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.7, ease: 'easeOut' }}
-      className="fixed top-3 left-1/2 z-50 w-[calc(100vw-1.5rem)] max-w-7xl -translate-x-1/2 rounded-full bg-gradient-to-b from-slate-950/30 to-slate-950/10 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.15),inset_0_1px_1px_rgba(255,255,255,0.1)] transition-all duration-500"
+      transition={{ duration: 0.35, ease: 'easeOut' }}
+      className="fixed top-3 left-1/2 z-50 w-[calc(100vw-1.5rem)] max-w-7xl -translate-x-1/2 rounded-full bg-slate-950/20 backdrop-blur-lg border border-white/10 shadow-[0_8px_20px_rgba(15,23,42,0.1)] will-change-transform"
     >
       <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-3 px-2 sm:px-3 py-2 sm:py-3">
         <div className="flex items-center gap-2 sm:gap-3">
-          <div className="flex h-9 sm:h-12 w-9 sm:w-12 items-center justify-center rounded-3xl bg-gradient-to-br from-sky-400 to-indigo-500 text-white shadow-lg shadow-sky-500/20 border border-white/10">
+          <div className="flex h-9 sm:h-12 w-9 sm:w-12 items-center justify-center rounded-3xl bg-gradient-to-br from-sky-400 to-indigo-500 text-white shadow-md shadow-sky-500/15 border border-white/10">
             <span className="text-sm sm:text-lg font-black tracking-tight">M</span>
           </div>
           <div>
@@ -83,7 +53,7 @@ export function Header({ currentScreen, onNavigate }: HeaderProps) {
           </div>
         </div>
 
-        <nav className="hidden md:flex items-center gap-2 rounded-full bg-gradient-to-b from-slate-900/30 to-slate-950/20 p-2 border border-white/10 shadow-lg shadow-slate-950/5 backdrop-blur-xl">
+        <nav className="hidden md:flex items-center gap-1 rounded-full bg-slate-950/15 p-1.5 border border-white/10 shadow-sm shadow-slate-950/5 backdrop-blur-lg">
           {tabs.map((tab) => (
             <NavButton
               key={tab.id}
@@ -94,15 +64,15 @@ export function Header({ currentScreen, onNavigate }: HeaderProps) {
           ))}
         </nav>
 
-        <div className="md:hidden flex flex-wrap justify-center gap-1.5 overflow-x-auto bg-gradient-to-b from-slate-950/30 to-slate-950/15 rounded-full px-2 py-1.5 hide-scrollbar border border-white/10 shadow-md shadow-slate-950/5">
+        <div className="md:hidden flex flex-wrap justify-center gap-1 overflow-x-auto bg-slate-950/15 rounded-full px-1.5 py-1 hide-scrollbar border border-white/10 shadow-sm shadow-slate-950/5">
           {tabs.map((tab) => (
             <button
               type="button"
               key={tab.id}
               onClick={() => onNavigate(tab.id)}
               aria-current={currentScreen === tab.id ? 'page' : undefined}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-full whitespace-nowrap transition-all duration-300 backdrop-blur ${
-                currentScreen === tab.id ? 'bg-sky-500/80 text-white shadow-lg shadow-sky-500/30 border border-sky-400/50' : 'text-slate-300 bg-white/5 hover:text-white hover:bg-white/10 border border-transparent hover:border-white/20'
+              className={`px-3 py-1 text-xs font-semibold rounded-full whitespace-nowrap transition-colors duration-150 ${
+                currentScreen === tab.id ? 'bg-sky-500/25 text-white border border-sky-400/40' : 'text-slate-300 bg-white/0 hover:text-white hover:bg-white/5 border border-transparent'
               }`}
             >
               {tab.label}
