@@ -27,8 +27,8 @@ const NavButton: React.FC<{ tab: { id: ScreenName; label: string }; isActive: bo
      whileTap={{ scale: 0.98 }}
      transition={{ duration: 0.22 }}
      aria-current={isActive ? 'page' : undefined}
-     className={`relative px-5 py-2 text-sm font-semibold rounded-full overflow-hidden transition-all duration-300 group ${
-       isActive ? 'text-white' : 'text-slate-300 hover:text-white hover:bg-sky-500/15'
+     className={`relative px-5 py-2 text-sm font-semibold rounded-full overflow-hidden transition-all duration-300 group border backdrop-blur-sm ${
+       isActive ? 'text-white border-sky-400/50' : 'text-slate-300 hover:text-white hover:bg-white/10 border-white/10 hover:border-white/20'
      }`}
    >
       <div 
@@ -46,7 +46,7 @@ const NavButton: React.FC<{ tab: { id: ScreenName; label: string }; isActive: bo
      {isActive && (
        <motion.div
          layoutId="active-pill"
-         className="absolute inset-0 bg-sky-500/20 border border-sky-400/30 rounded-full shadow-sm"
+         className="absolute inset-0 bg-gradient-to-b from-sky-500/40 to-sky-500/20 border border-sky-300/50 rounded-full shadow-lg shadow-sky-500/20 backdrop-blur-sm"
          transition={{ type: 'spring', duration: 0.6, bounce: 0.2 }}
        />
      )}
@@ -70,20 +70,20 @@ export function Header({ currentScreen, onNavigate }: HeaderProps) {
       initial={{ y: -40, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7, ease: 'easeOut' }}
-      className="fixed top-3 left-1/2 z-50 w-[calc(100vw-1.5rem)] max-w-7xl -translate-x-1/2 rounded-full bg-slate-950/95 backdrop-blur-3xl border border-sky-500/20 shadow-[0_25px_80px_rgba(15,23,42,0.35)] transition-all duration-500"
+      className="fixed top-3 left-1/2 z-50 w-[calc(100vw-1.5rem)] max-w-7xl -translate-x-1/2 rounded-full bg-gradient-to-b from-slate-950/30 to-slate-950/10 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.15),inset_0_1px_1px_rgba(255,255,255,0.1)] transition-all duration-500"
     >
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 px-3 py-3">
-        <div className="flex items-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-3xl bg-gradient-to-br from-sky-400 to-indigo-500 text-white shadow-lg shadow-sky-500/20 border border-white/10">
-            <span className="text-lg font-black tracking-tight">M</span>
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-3 px-2 sm:px-3 py-2 sm:py-3">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex h-9 sm:h-12 w-9 sm:w-12 items-center justify-center rounded-3xl bg-gradient-to-br from-sky-400 to-indigo-500 text-white shadow-lg shadow-sky-500/20 border border-white/10">
+            <span className="text-sm sm:text-lg font-black tracking-tight">M</span>
           </div>
           <div>
-            <div className="text-base font-black text-white">Mercury</div>
-            <div className="text-[10px] uppercase tracking-[0.35em] text-sky-300/70">Tech</div>
+            <div className="text-sm sm:text-base font-black text-white">Mercury</div>
+            <div className="text-[8px] sm:text-[10px] uppercase tracking-[0.35em] text-sky-300/70">Tech</div>
           </div>
         </div>
 
-        <nav className="hidden md:flex items-center gap-2 rounded-full bg-slate-900/70 p-2 border border-sky-500/10 shadow-xl shadow-slate-950/20 backdrop-blur-xl">
+        <nav className="hidden md:flex items-center gap-2 rounded-full bg-gradient-to-b from-slate-900/30 to-slate-950/20 p-2 border border-white/10 shadow-lg shadow-slate-950/5 backdrop-blur-xl">
           {tabs.map((tab) => (
             <NavButton
               key={tab.id}
@@ -94,15 +94,15 @@ export function Header({ currentScreen, onNavigate }: HeaderProps) {
           ))}
         </nav>
 
-        <div className="md:hidden flex flex-wrap justify-center gap-2 overflow-x-auto bg-slate-950/90 rounded-full px-3 py-2 hide-scrollbar border border-sky-500/10 shadow-sm">
+        <div className="md:hidden flex flex-wrap justify-center gap-1.5 overflow-x-auto bg-gradient-to-b from-slate-950/30 to-slate-950/15 rounded-full px-2 py-1.5 hide-scrollbar border border-white/10 shadow-md shadow-slate-950/5">
           {tabs.map((tab) => (
             <button
               type="button"
               key={tab.id}
               onClick={() => onNavigate(tab.id)}
               aria-current={currentScreen === tab.id ? 'page' : undefined}
-              className={`px-4 py-2 text-xs font-semibold rounded-full whitespace-nowrap transition-all duration-300 ${
-                currentScreen === tab.id ? 'bg-sky-500 text-white shadow-lg shadow-sky-500/20' : 'text-slate-300 bg-white/5 hover:text-white hover:bg-white/10'
+              className={`px-3 py-1.5 text-xs font-semibold rounded-full whitespace-nowrap transition-all duration-300 backdrop-blur ${
+                currentScreen === tab.id ? 'bg-sky-500/80 text-white shadow-lg shadow-sky-500/30 border border-sky-400/50' : 'text-slate-300 bg-white/5 hover:text-white hover:bg-white/10 border border-transparent hover:border-white/20'
               }`}
             >
               {tab.label}
