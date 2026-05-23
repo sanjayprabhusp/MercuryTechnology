@@ -1,0 +1,6 @@
+{
+  "name": "Thiran360AI App",
+  "description": "Company dashboard and employee directory for Thiran360AI.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
