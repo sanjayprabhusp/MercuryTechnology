@@ -1,83 +1,209 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { ScreenName } from '../types';
+import { Zap } from 'lucide-react';
 
 interface HeaderProps {
   currentScreen: ScreenName;
   onNavigate: (screen: ScreenName) => void;
 }
 
-const NavButton: React.FC<{ tab: { id: ScreenName; label: string }; isActive: boolean; onClick: () => void }> = ({ tab, isActive, onClick }) => {
-   return (
-    <motion.button
-     type="button"
-     onClick={onClick}
-     whileHover={{ y: -1, scale: 1.01 }}
-     whileTap={{ scale: 0.99 }}
-     transition={{ duration: 0.15 }}
-     aria-current={isActive ? 'page' : undefined}
-     className={`relative px-4 py-2 text-sm font-semibold rounded-full overflow-hidden transition-colors duration-150 will-change-transform ${
-       isActive ? 'text-white bg-sky-500/25 border border-sky-400/40' : 'text-slate-300 hover:text-white hover:bg-white/5 border border-white/10'
-     }`}
-   >
-     <span className="relative z-10">{tab.label}</span>
-   </motion.button>
-  );
-}
+const tabs: {
+  id: ScreenName;
+  label: string;
+}[] = [
+  { id: 'home', label: 'Home' },
+  { id: 'service', label: 'Services' },
+  { id: 'product', label: 'Products' },
+  { id: 'about', label: 'About' },
+  { id: 'employees', label: 'Team' },
+  { id: 'contact', label: 'Contact' },
+];
 
-export function Header({ currentScreen, onNavigate }: HeaderProps) {
-  const tabs: { id: ScreenName; label: string }[] = [
-    { id: 'home', label: 'Home' },
-    { id: 'service', label: 'Services' },
-    { id: 'product', label: 'Products' },
-    { id: 'about', label: 'About Us' },
-    { id: 'employees', label: 'Employees' },
-    { id: 'contact', label: 'Contact' },
-  ];
-
+export function Header({
+  currentScreen,
+  onNavigate,
+}: HeaderProps) {
   return (
     <motion.header
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.35, ease: 'easeOut' }}
-      className="fixed top-3 left-1/2 z-50 w-[calc(100vw-1.5rem)] max-w-7xl -translate-x-1/2 rounded-full bg-slate-950/20 backdrop-blur-lg border border-white/10 shadow-[0_8px_20px_rgba(15,23,42,0.1)] will-change-transform"
+      initial={{
+        opacity: 0,
+        y: -20,
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+      }}
+      transition={{
+        duration: 0.5,
+      }}
+      className="
+        fixed
+        top-0
+        left-0
+        right-0
+        z-50
+        flex
+        justify-center
+        px-5
+        pt-6
+      "
     >
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-3 px-2 sm:px-3 py-2 sm:py-3">
-        <div className="flex items-center gap-2 sm:gap-3">
-          <div className="flex h-9 sm:h-12 w-9 sm:w-12 items-center justify-center rounded-3xl bg-gradient-to-br from-sky-400 to-indigo-500 text-white shadow-md shadow-sky-500/15 border border-white/10">
-            <span className="text-sm sm:text-lg font-black tracking-tight">M</span>
-          </div>
-          <div>
-            <div className="text-sm sm:text-base font-black text-white">Mercury</div>
-            <div className="text-[8px] sm:text-[10px] uppercase tracking-[0.35em] text-sky-300/70">Tech</div>
-          </div>
-        </div>
+      <div
+        className="
+        w-full
+        max-w-7xl
+        rounded-full
+        border
+        border-white/10
+        bg-black/35
+        backdrop-blur-xl
+        px-6
+        py-4
+        shadow-[0_10px_50px_rgba(0,0,0,0.35)]
+      "
+      >
+        <div
+          className="
+          flex
+          items-center
+          justify-between
+          gap-5
+        "
+        >
 
-        <nav className="hidden md:flex items-center gap-1 rounded-full bg-slate-950/15 p-1.5 border border-white/10 shadow-sm shadow-slate-950/5 backdrop-blur-lg">
-          {tabs.map((tab) => (
-            <NavButton
-              key={tab.id}
-              tab={tab}
-              isActive={currentScreen === tab.id}
-              onClick={() => onNavigate(tab.id)}
-            />
-          ))}
-        </nav>
+          {/* LOGO */}
 
-        <div className="md:hidden flex flex-wrap justify-center gap-1 overflow-x-auto bg-slate-950/15 rounded-full px-1.5 py-1 hide-scrollbar border border-white/10 shadow-sm shadow-slate-950/5">
-          {tabs.map((tab) => (
-            <button
-              type="button"
-              key={tab.id}
-              onClick={() => onNavigate(tab.id)}
-              aria-current={currentScreen === tab.id ? 'page' : undefined}
-              className={`px-3 py-1 text-xs font-semibold rounded-full whitespace-nowrap transition-colors duration-150 ${
-                currentScreen === tab.id ? 'bg-sky-500/25 text-white border border-sky-400/40' : 'text-slate-300 bg-white/0 hover:text-white hover:bg-white/5 border border-transparent'
-              }`}
+          <button
+            onClick={() =>
+              onNavigate('home')
+            }
+            className="
+            flex
+            items-center
+            gap-3
+            shrink-0
+            "
+          >
+            <div
+              className="
+              h-12
+              w-12
+              rounded-2xl
+              bg-gradient-to-br
+              from-cyan-400
+              via-blue-500
+              to-indigo-600
+              flex
+              items-center
+              justify-center
+              shadow-lg
+              "
             >
-              {tab.label}
-            </button>
-          ))}
+              <Zap
+                size={22}
+                className="text-white"
+              />
+            </div>
+
+            <div>
+              <div
+                className="
+                text-white
+                font-bold
+                text-lg
+                tracking-tight
+                "
+              >
+                Mercury
+              </div>
+
+              <div
+                className="
+                text-cyan-300
+                text-[10px]
+                uppercase
+                tracking-[3px]
+                "
+              >
+                Technology
+              </div>
+            </div>
+          </button>
+
+          {/* NAVIGATION */}
+
+          <nav
+            className="
+            flex
+            overflow-x-auto
+            gap-2
+            justify-center
+            flex-1
+            hide-scrollbar
+          "
+          >
+            {tabs.map((tab) => {
+              const active =
+                currentScreen === tab.id;
+
+              return (
+                <motion.button
+                  key={tab.id}
+                  whileHover={{
+                    y: -1,
+                  }}
+                  whileTap={{
+                    scale: 0.98,
+                  }}
+                  onClick={() =>
+                    onNavigate(tab.id)
+                  }
+                  className={`
+                    relative
+                    px-4
+                    py-2
+                    rounded-full
+                    whitespace-nowrap
+                    text-sm
+                    transition
+
+                    ${
+                      active
+                        ? `
+                        bg-white/10
+                        border
+                        border-cyan-400/30
+                        text-white
+                        `
+                        : `
+                        text-white/70
+                        hover:text-white
+                      `
+                    }
+                  `}
+                >
+                  {tab.label}
+
+                  {active && (
+                    <motion.div
+                      layoutId="navActive"
+                      className="
+                      absolute
+                      bottom-0
+                      left-1/2
+                      h-[2px]
+                      w-6
+                      bg-cyan-400
+                      -translate-x-1/2
+                    "
+                    />
+                  )}
+                </motion.button>
+              );
+            })}
+          </nav>
+
         </div>
       </div>
     </motion.header>
