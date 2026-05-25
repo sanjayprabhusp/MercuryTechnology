@@ -1,20 +1,52 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Zap, Menu, X } from 'lucide-react';
+import {
+  motion,
+  AnimatePresence,
+} from 'framer-motion';
+
+import {
+  Zap,
+  Menu,
+  X,
+} from 'lucide-react';
+
 import { ScreenName } from '../types';
 
 interface HeaderProps {
   currentScreen: ScreenName;
-  onNavigate: (screen: ScreenName) => void;
+  onNavigate: (
+    screen: ScreenName
+  ) => void;
 }
 
-const tabs = [
-  { id: 'home', label: 'Home' },
-  { id: 'service', label: 'Service' },
-  { id: 'product', label: 'Product' },
-  { id: 'about', label: 'About' },
-  { id: 'employees', label: 'Team' },
-  { id: 'contact', label: 'Contact' },
+const tabs: {
+  id: ScreenName;
+  label: string;
+}[] = [
+  {
+    id: 'home',
+    label: 'Home',
+  },
+  {
+    id: 'service',
+    label: 'Service',
+  },
+  {
+    id: 'product',
+    label: 'Product',
+  },
+  {
+    id: 'about',
+    label: 'About',
+  },
+  {
+    id: 'employees',
+    label: 'Team',
+  },
+  {
+    id: 'contact',
+    label: 'Contact',
+  },
 ];
 
 export function Header({
@@ -23,6 +55,9 @@ export function Header({
 }: HeaderProps) {
   const [open, setOpen] =
     useState(false);
+
+  const closeMenu = () =>
+    setOpen(false);
 
   return (
     <>
@@ -35,15 +70,18 @@ export function Header({
           opacity: 1,
           y: 0,
         }}
+        transition={{
+          duration: 0.4,
+        }}
         className="
-        fixed
-        top-0
-        left-0
-        right-0
-        z-50
-        px-3
-        pt-3
-      "
+          fixed
+          top-0
+          left-0
+          right-0
+          z-50
+          px-3
+          pt-3
+        "
       >
         <div
           className="
@@ -63,8 +101,11 @@ export function Header({
           {/* LOGO */}
 
           <button
+            type="button"
             onClick={() =>
-              onNavigate('home')
+              onNavigate(
+                'home'
+              )
             }
             className="
             flex
@@ -83,7 +124,6 @@ export function Header({
               flex
               items-center
               justify-center
-              shadow-lg
             "
             >
               <Zap
@@ -95,41 +135,42 @@ export function Header({
             </div>
 
             <div>
-              <div
+              <h1
                 className="
                 text-white
-                text-xl
+                text-lg
                 font-bold
               "
               >
                 Mercury
-              </div>
+              </h1>
 
-              <div
+              <p
                 className="
-                text-blue-300
+                text-cyan-300
                 text-xs
               "
               >
                 Technology
-              </div>
+              </p>
             </div>
           </button>
 
           {/* MENU */}
 
           <button
+            type="button"
             onClick={() =>
               setOpen(true)
             }
             className="
             w-12
             h-12
-            rounded-xl
-            text-white
             flex
             items-center
             justify-center
+            rounded-xl
+            text-white
           "
           >
             <Menu size={28} />
@@ -137,7 +178,7 @@ export function Header({
         </div>
       </motion.header>
 
-      {/* FULL SCREEN MENU */}
+      {/* OVERLAY */}
 
       <AnimatePresence>
         {open && (
@@ -165,54 +206,24 @@ export function Header({
               h-[78px]
               px-5
               flex
-              items-center
               justify-between
-              border-b
-              border-white/10
+              items-center
             "
             >
               <div
                 className="
-                flex
-                items-center
-                gap-3
+                text-white
+                font-bold
+                text-xl
               "
               >
-                <div
-                  className="
-                  w-12
-                  h-12
-                  rounded-2xl
-                  bg-gradient-to-br
-                  from-blue-500
-                  to-cyan-400
-                  flex
-                  items-center
-                  justify-center
-                "
-                >
-                  <Zap
-                    size={20}
-                    className="
-                    text-white
-                  "
-                  />
-                </div>
-
-                <div>
-                  <div className="text-white font-bold">
-                    Mercury
-                  </div>
-
-                  <div className="text-blue-300 text-xs">
-                    Technology
-                  </div>
-                </div>
+                Mercury
               </div>
 
               <button
-                onClick={() =>
-                  setOpen(false)
+                type="button"
+                onClick={
+                  closeMenu
                 }
                 className="
                 text-white
@@ -222,11 +233,12 @@ export function Header({
               </button>
             </div>
 
-            {/* MENU ITEMS */}
+            {/* MENU */}
 
             <div
               className="
-              p-6
+              px-6
+              pt-8
             "
             >
               {tabs.map(
@@ -235,6 +247,7 @@ export function Header({
                   index
                 ) => (
                   <motion.button
+                    type="button"
                     key={
                       tab.id
                     }
@@ -256,33 +269,31 @@ export function Header({
                         tab.id
                       );
 
-                      setOpen(
-                        false
-                      );
+                      closeMenu();
                     }}
                     className={`
-                      w-full
-                      text-left
-                      py-7
-                      text-xl
-                      rounded-3xl
-                      px-5
-                      mb-3
-                      transition
+                    block
+                    w-full
+                    text-left
+                    py-6
+                    text-2xl
+                    rounded-3xl
+                    px-5
+                    mb-3
 
-                      ${
-                        currentScreen ===
-                        tab.id
-                          ? `
+                    ${
+                      currentScreen ===
+                      tab.id
+                        ? `
                         bg-blue-500/20
                         text-white
-                      `
-                          : `
-                        text-white/70
+                        `
+                        : `
+                        text-slate-300
                         hover:text-white
                       `
-                      }
-                    `}
+                    }
+                  `}
                   >
                     {tab.label}
                   </motion.button>

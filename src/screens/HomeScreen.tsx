@@ -1,157 +1,80 @@
 import { motion } from 'motion/react';
-import React, { useEffect, useState } from 'react';
-import { GlowButton } from '../components/GlowButton';
+import React from 'react';
 import { OrbitCarousel } from '../components/OrbitCarousel';
 import { Cloud, Code, Cpu, Database } from 'lucide-react';
 
-const FloatingIcons = ({ reduced }: { reduced?: boolean }) => (
+const FloatingIcons = () => (
   <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-    <motion.div
-      className={"absolute top-[15%] left-[10%] md:left-[20%] text-sky-500/10 md:text-sky-500/20"}
-      animate={reduced ? { y: [0, -8, 0], x: [0, 6, 0], rotate: [0, 4, 0] } : { y: [0, -30, 0], x: [0, 20, 0], rotate: [0, 10, 0] }}
-      transition={reduced ? { duration: 8, repeat: Infinity, ease: "easeInOut" } : { duration: 15, repeat: Infinity, ease: "easeInOut" }}
-    >
+    <div className="absolute top-[15%] left-[10%] text-sky-500/10 md:text-sky-500/20">
       <Cloud size={80} />
-    </motion.div>
-    <motion.div
-      className="absolute top-[25%] right-[10%] md:right-[25%] text-sky-600/10 md:text-sky-600/20"
-      animate={reduced ? { y: [0, 12, 0], x: [0, -6, 0], rotate: [0, -6, 0] } : { y: [0, 40, 0], x: [0, -20, 0], rotate: [0, -15, 0] }}
-      transition={reduced ? { duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1 } : { duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-    >
+    </div>
+    <div className="absolute top-[25%] right-[10%] text-sky-600/10 md:text-sky-600/20">
       <Code size={64} />
-    </motion.div>
-    <motion.div
-      className="absolute bottom-[40%] left-[5%] md:left-[25%] text-sky-400/10 md:text-sky-400/20"
-      animate={reduced ? { y: [0, 8, 0], x: [0, -8, 0], rotate: [0, 8, 0] } : { y: [0, 25, 0], x: [0, -30, 0], rotate: [0, 20, 0] }}
-      transition={reduced ? { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 } : { duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-    >
+    </div>
+    <div className="absolute bottom-[40%] left-[5%] text-sky-400/10 md:text-sky-400/20">
       <Cpu size={90} />
-    </motion.div>
-    <motion.div
-      className="absolute bottom-[20%] right-[10%] md:right-[20%] text-sky-500/10 md:text-sky-500/20"
-      animate={reduced ? { y: [0, -10, 0], x: [0, 12, 0], rotate: [0, -6, 0] } : { y: [0, -40, 0], x: [0, 30, 0], rotate: [0, -10, 0] }}
-      transition={reduced ? { duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1.5 } : { duration: 20, repeat: Infinity, ease: "easeInOut", delay: 3 }}
-    >
+    </div>
+    <div className="absolute bottom-[20%] right-[10%] text-sky-500/10 md:text-sky-500/20">
       <Database size={100} />
-    </motion.div>
+    </div>
   </div>
 );
 
-const DigitalGlobe = ({ reduced }: { reduced?: boolean }) => (
-  <div className={`absolute top-[20%] md:top-[30%] lg:top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 ${reduced ? 'scale-[0.22]' : 'scale-[0.3] sm:scale-[0.4] md:scale-[0.5]'} pointer-events-none z-0 flex items-center justify-center ${reduced ? 'opacity-40' : 'opacity-70'}`}>
-    <div className={`${reduced ? 'w-[280px] h-[280px]' : 'w-[500px] h-[500px]'} absolute bg-sky-200/40 rounded-full ${reduced ? 'blur-2xl' : 'blur-3xl'}`} />
-    <motion.div 
-      className={`relative ${reduced ? 'w-[280px] h-[280px]' : 'w-[500px] h-[500px]'} rounded-full`}
-      style={{ transformStyle: 'preserve-3d' }}
-      animate={reduced ? { rotateY: [0, 180, 0], rotateX: [10, 20, 10] } : { rotateY: [0, 360], rotateX: [15, 25, 15] }}
-      transition={reduced ? { rotateY: { duration: 20, repeat: Infinity, ease: "linear" }, rotateX: { duration: 12, repeat: Infinity, ease: "easeInOut" } } : { rotateY: { duration: 25, repeat: Infinity, ease: "linear" }, rotateX: { duration: 15, repeat: Infinity, ease: "easeInOut" } }}
-    >
-      {[...Array(8)].map((_, i) => (
-        <div 
-          key={`lng-${i}`}
-          className="absolute inset-0 rounded-full border border-sky-400/20"
-          style={{ transform: `rotateY(${i * 22.5}deg)` }}
-        />
-      ))}
-      {[...Array(7)].map((_, i) => (
-        <div 
-          key={`lat-${i}`}
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-sky-400/20"
-          style={{ 
-            width: `${Math.cos((i - 3) * 25 * Math.PI / 180) * 100}%`,
-            height: `${Math.cos((i - 3) * 25 * Math.PI / 180) * 100}%`,
-            transform: `translate(-50%, -50%) rotateX(90deg) translateZ(${Math.sin((i - 3) * 25 * Math.PI / 180) * (reduced ? 160 : 250)}px)`
-          }}
-        />
-      ))}
-    </motion.div>
-  </div>
+const FloatingModel = () => (
+  <motion.div
+    animate={{ y: [0, -18, 0], rotate: [0, 2, 0] }}
+    transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+    className="relative w-full max-w-[420px] aspect-[1.02]"
+  >
+    <div className="absolute inset-0 rounded-[3rem] bg-gradient-to-br from-violet-900 via-fuchsia-700 to-sky-500 shadow-[0_40px_120px_rgba(168,85,247,0.25)] ring-1 ring-white/10 overflow-hidden">
+      <div className="absolute -left-10 top-12 w-40 h-40 rounded-full bg-fuchsia-500/30 blur-3xl" />
+      <div className="absolute right-10 bottom-10 w-52 h-52 rounded-full bg-cyan-300/20 blur-3xl" />
+      <div className="absolute inset-x-0 top-1/2 h-1/2 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.18),transparent_55%)]" />
+      <div className="absolute left-16 top-16 w-24 h-24 rounded-full bg-white/10 backdrop-blur-md" />
+      <div className="absolute right-16 bottom-16 w-24 h-24 rounded-full bg-purple-300/20 blur-xl" />
+      <div className="absolute inset-0 border border-white/10" />
+    </div>
+    <div className="absolute inset-0 rounded-[3rem] ring-1 ring-cyan-300/20 backdrop-blur-sm" />
+  </motion.div>
 );
 
 export function HomeScreen() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia('(max-width: 640px)');
-    const handle = () => setIsMobile(mq.matches);
-    handle();
-    mq.addEventListener?.('change', handle);
-    window.addEventListener('resize', handle);
-    return () => {
-      mq.removeEventListener?.('change', handle);
-      window.removeEventListener('resize', handle);
-    };
-  }, []);
   return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.1 }}
-        transition={{ duration: 0.8, delay: 0.1 }}
-        className="relative z-10 w-full overflow-hidden min-h-[calc(100vh-80px)] pt-20 pb-12"
-      >
-        <FloatingIcons reduced={isMobile} />
-        <DigitalGlobe reduced={isMobile} />
+    <div className="relative z-10 w-full overflow-hidden min-h-[calc(100vh-80px)] pt-20 pb-12">
+      <FloatingIcons />
 
-        <div className="relative z-20 max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            {/* Left: Content */}
-            <div className="text-center py-12 flex flex-col items-center">
-              <motion.h1
-                initial={{ scale: 0.98, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.2, ease: 'easeInOut' }}
-                className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight drop-shadow-[0_12px_30px_rgba(0,0,0,0.55)]"
-              >
-                <span className="text-sky-400">We Build</span> <span className="text-white">Digital Experiences</span>
-              </motion.h1>
+      <div className="relative z-20 max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div className="text-center py-12 flex flex-col items-center">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight drop-shadow-[0_12px_30px_rgba(0,0,0,0.55)]">
+              <span className="text-sky-400">We Build</span> <span className="text-white">Digital Experiences</span>
+            </h1>
 
-              <motion.p
-                initial={{ y: 10, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.0, delay: 0.15, ease: 'easeInOut' }}
-                className="mt-6 text-lg md:text-xl text-slate-200 max-w-xl leading-relaxed"
-              >
-                Crafting innovative technology solutions that transform businesses and elevate user experiences.
-              </motion.p>
-
-              {/* About button intentionally removed from homepage per request */}
-            </div>
-
-            {/* Right: Blobs / visual */}
-            <div className="relative w-full h-96 md:h-[480px] lg:h-[560px] flex items-center justify-center pointer-events-none">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative w-full h-full hero-blobs">
-                  {/* colorful blobs generated with layered divs */}
-                  <div className="absolute right-6 top-8 w-64 h-40 md:w-96 md:h-56 rounded-full bg-gradient-to-r from-pink-500 via-violet-500 to-cyan-400 opacity-90 blur-[36px] transform rotate-6" />
-                  <div className="absolute right-24 top-40 w-44 h-28 md:w-72 md:h-44 rounded-full bg-gradient-to-r from-cyan-300 via-sky-500 to-fuchsia-500 opacity-95 blur-[30px] transform rotate-12" />
-                  <div className="absolute right-[-20px] bottom-12 w-96 h-72 md:w-[520px] md:h-[360px] rounded-[48%] bg-gradient-to-r from-violet-600 via-pink-400 to-cyan-300 opacity-95 blur-[40px] transform rotate-6" />
-                  <div className="absolute right-40 bottom-36 w-36 h-24 md:w-56 md:h-36 rounded-full bg-gradient-to-r from-pink-400 via-sky-300 to-cyan-400 opacity-90 blur-[20px] transform rotate-12" />
-
-                  {/* glossy highlights */}
-                  <div className="absolute right-14 top-20 w-36 h-20 md:w-52 md:h-28 rounded-full bg-white/10 mix-blend-screen blur-[8px]" />
-                </div>
-              </div>
-            </div>
+            <p className="mt-6 text-lg md:text-xl text-slate-200 max-w-xl leading-relaxed">
+              Crafting innovative technology solutions that transform businesses and elevate user experiences.
+            </p>
           </div>
 
-          {/* Featured carousel kept below hero */}
-          <div className="w-full mt-12">
-            <OrbitCarousel
-              items={[
-                { img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070", title: "Data Analytics", description: "Actionable insights from user behavior, revenue trends, and operational health." },
-                { img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000", title: "Abstract UI", description: "Themed interface systems built for clarity, motion, and brand-forward presentation." },
-                { img: "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=2000", title: "Finance Logic", description: "Secure fintech dashboards and intelligent workflows for modern financial teams." },
-                { img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2000", title: "Smart Tech", description: "Connected product experiences blending automation, IoT, and responsive data surfaces." },
-                { img: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070", title: "Code Platform", description: "Developer-centric tooling that streamlines engineering delivery and shared collaboration." },
-                { img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070", title: "Team Collaboration", description: "Real-time planning and communication tools that keep distributed teams aligned." },
-              ]}
-              title={<h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight opacity-90">Featured <span className="text-sky-400">Projects</span></h2>}
-            />
+          <div className="relative w-full h-96 md:h-[480px] lg:h-[560px] flex items-center justify-center pointer-events-none">
+            <div className="hero-model-bg absolute inset-0 rounded-[2.5rem] bg-cover bg-center shadow-[0_40px_120px_rgba(20,18,49,0.35)]" />
+            <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-t from-slate-950/30 via-transparent to-slate-950/10" />
+            <div className="absolute inset-0 flex items-center justify-center p-6">
+              <FloatingModel />
+            </div>
           </div>
         </div>
-      </motion.div>
+
+        <div className="w-full mt-12">
+          <OrbitCarousel
+            items={[
+              { img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070', title: 'Data Analytics' },
+              { img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000', title: 'Abstract UI' },
+              { img: 'https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=2000', title: 'Finance Logic' },
+            ]}
+            title={<h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight opacity-90">Featured <span className="text-sky-400">Projects</span></h2>}
+          />
+        </div>
+      </div>
+    </div>
   );
 }

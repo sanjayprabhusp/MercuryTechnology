@@ -1,4 +1,3 @@
-import { motion } from 'motion/react';
 import { Package, Layers, Rocket, Server, Shield, TrendingUp } from 'lucide-react';
 
 const logos = [
@@ -20,11 +19,11 @@ export function FloatingLogoRing() {
             <div className="space-y-4">
               <p className="text-xs uppercase tracking-[0.32em] text-sky-300/80">Connecting sections</p>
               <h2 className="text-4xl font-black text-white">Floating service and product logos</h2>
-              <p className="text-slate-300 leading-relaxed">A smooth loop of emblematic circles creates a subtle motion bridge between product and about pages, reinforcing the brand rhythm.</p>
+              <p className="text-slate-300 leading-relaxed">A clean showcase of capabilities and brand rhythm without heavy runtime motion.</p>
             </div>
             <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-slate-900/70 p-4">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(56,189,248,0.2),_transparent_25%)]" />
-              <motion.div animate={{ x: [0, -240, 0] }} transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }} className="flex gap-4 items-center">
+              <div className="flex flex-wrap gap-4 items-center justify-center">
                 {logos.map((item, index) => {
                   const Icon = item.icon;
                   return (
@@ -36,20 +35,7 @@ export function FloatingLogoRing() {
                     </div>
                   );
                 })}
-              </motion.div>
-              <motion.div animate={{ x: [260, 0, 260] }} transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }} className="mt-6 flex gap-4 items-center">
-                {logos.slice().reverse().map((item, index) => {
-                  const Icon = item.icon;
-                  return (
-                    <div key={`${item.label}-invert-${index}`} className="flex-shrink-0 flex flex-col items-center gap-3 rounded-[2rem] border border-sky-500/15 bg-slate-950/90 px-5 py-4 shadow-[0_18px_45px_rgba(14,165,233,0.14)]">
-                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-slate-800 text-sky-200">
-                        <Icon size={24} />
-                      </div>
-                      <span className="text-sm font-semibold text-slate-100 text-center">{item.label}</span>
-                    </div>
-                  );
-                })}
-              </motion.div>
+              </div>
             </div>
           </div>
         </div>

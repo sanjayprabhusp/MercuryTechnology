@@ -29,6 +29,20 @@ section {
   scroll-snap-stop: always;
 }
 
+.wave-bg-main {
+  background: linear-gradient(135deg, #041b37 0%, #0c3f78 25%, #0f4bb5 55%, #07122f 100%);
+}
+
+.wave-bg-layer-1 {
+  background: radial-gradient(circle at 60% 40%, rgba(56, 189, 248, 0.35) 0%, transparent 40%), radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.18) 0%, transparent 40%);
+  background-repeat: no-repeat;
+}
+
+.wave-bg-layer-2 {
+  background: radial-gradient(circle at 20% 80%, rgba(14, 165, 233, 0.28) 0%, transparent 50%), radial-gradient(circle at 40% 60%, rgba(59, 130, 246, 0.18) 0%, transparent 50%);
+  background-repeat: no-repeat;
+}
+
 @media (max-width: 640px) {
   /* Reduce heavy blurs and large visuals on mobile to improve performance */
   .hero-blobs > div {
