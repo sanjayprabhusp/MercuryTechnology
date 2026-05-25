@@ -46,7 +46,7 @@ export function OrbitCarousel({ items, title, className = '' }: { items: { img: 
             className="absolute inset-0 flex flex-col md:flex-row items-stretch"
           >
             <div className="w-full md:w-1/2 relative h-[260px] md:h-auto overflow-hidden">
-              <img src={items[index].img} alt={items[index].title || 'slide'} className="w-full h-full object-cover" />
+              <img src={items[index].img} alt={items[index].title || 'slide'} className="w-full h-full object-cover" loading="lazy" decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-transparent to-transparent" />
             </div>
             <div className="flex-1 p-6 md:p-12 flex flex-col justify-center">

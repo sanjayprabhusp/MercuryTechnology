@@ -1,49 +1,50 @@
 import { motion } from 'motion/react';
+import React, { useEffect, useState } from 'react';
 import { GlowButton } from '../components/GlowButton';
 import { OrbitCarousel } from '../components/OrbitCarousel';
 import { Cloud, Code, Cpu, Database } from 'lucide-react';
 
-const FloatingIcons = () => (
+const FloatingIcons = ({ reduced }: { reduced?: boolean }) => (
   <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
     <motion.div
-      className="absolute top-[15%] left-[10%] md:left-[20%] text-sky-500/10 md:text-sky-500/20"
-      animate={{ y: [0, -30, 0], x: [0, 20, 0], rotate: [0, 10, 0] }}
-      transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+      className={"absolute top-[15%] left-[10%] md:left-[20%] text-sky-500/10 md:text-sky-500/20"}
+      animate={reduced ? { y: [0, -8, 0], x: [0, 6, 0], rotate: [0, 4, 0] } : { y: [0, -30, 0], x: [0, 20, 0], rotate: [0, 10, 0] }}
+      transition={reduced ? { duration: 8, repeat: Infinity, ease: "easeInOut" } : { duration: 15, repeat: Infinity, ease: "easeInOut" }}
     >
       <Cloud size={80} />
     </motion.div>
     <motion.div
       className="absolute top-[25%] right-[10%] md:right-[25%] text-sky-600/10 md:text-sky-600/20"
-      animate={{ y: [0, 40, 0], x: [0, -20, 0], rotate: [0, -15, 0] }}
-      transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+      animate={reduced ? { y: [0, 12, 0], x: [0, -6, 0], rotate: [0, -6, 0] } : { y: [0, 40, 0], x: [0, -20, 0], rotate: [0, -15, 0] }}
+      transition={reduced ? { duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1 } : { duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
     >
       <Code size={64} />
     </motion.div>
     <motion.div
       className="absolute bottom-[40%] left-[5%] md:left-[25%] text-sky-400/10 md:text-sky-400/20"
-      animate={{ y: [0, 25, 0], x: [0, -30, 0], rotate: [0, 20, 0] }}
-      transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      animate={reduced ? { y: [0, 8, 0], x: [0, -8, 0], rotate: [0, 8, 0] } : { y: [0, 25, 0], x: [0, -30, 0], rotate: [0, 20, 0] }}
+      transition={reduced ? { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 } : { duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
     >
       <Cpu size={90} />
     </motion.div>
     <motion.div
       className="absolute bottom-[20%] right-[10%] md:right-[20%] text-sky-500/10 md:text-sky-500/20"
-      animate={{ y: [0, -40, 0], x: [0, 30, 0], rotate: [0, -10, 0] }}
-      transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+      animate={reduced ? { y: [0, -10, 0], x: [0, 12, 0], rotate: [0, -6, 0] } : { y: [0, -40, 0], x: [0, 30, 0], rotate: [0, -10, 0] }}
+      transition={reduced ? { duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1.5 } : { duration: 20, repeat: Infinity, ease: "easeInOut", delay: 3 }}
     >
       <Database size={100} />
     </motion.div>
   </div>
 );
 
-const DigitalGlobe = () => (
-  <div className="absolute top-[20%] md:top-[30%] lg:top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 scale-[0.3] sm:scale-[0.4] md:scale-[0.5] pointer-events-none z-0 flex items-center justify-center opacity-70">
-    <div className="absolute bg-sky-200/40 rounded-full blur-3xl w-[500px] h-[500px]" />
+const DigitalGlobe = ({ reduced }: { reduced?: boolean }) => (
+  <div className={`absolute top-[20%] md:top-[30%] lg:top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 ${reduced ? 'scale-[0.22]' : 'scale-[0.3] sm:scale-[0.4] md:scale-[0.5]'} pointer-events-none z-0 flex items-center justify-center ${reduced ? 'opacity-40' : 'opacity-70'}`}>
+    <div className={`${reduced ? 'w-[280px] h-[280px]' : 'w-[500px] h-[500px]'} absolute bg-sky-200/40 rounded-full ${reduced ? 'blur-2xl' : 'blur-3xl'}`} />
     <motion.div 
-      className="relative w-[500px] h-[500px] rounded-full"
+      className={`relative ${reduced ? 'w-[280px] h-[280px]' : 'w-[500px] h-[500px]'} rounded-full`}
       style={{ transformStyle: 'preserve-3d' }}
-      animate={{ rotateY: [0, 360], rotateX: [15, 25, 15] }}
-      transition={{ rotateY: { duration: 25, repeat: Infinity, ease: "linear" }, rotateX: { duration: 15, repeat: Infinity, ease: "easeInOut" } }}
+      animate={reduced ? { rotateY: [0, 180, 0], rotateX: [10, 20, 10] } : { rotateY: [0, 360], rotateX: [15, 25, 15] }}
+      transition={reduced ? { rotateY: { duration: 20, repeat: Infinity, ease: "linear" }, rotateX: { duration: 12, repeat: Infinity, ease: "easeInOut" } } : { rotateY: { duration: 25, repeat: Infinity, ease: "linear" }, rotateX: { duration: 15, repeat: Infinity, ease: "easeInOut" } }}
     >
       {[...Array(8)].map((_, i) => (
         <div 
@@ -59,7 +60,7 @@ const DigitalGlobe = () => (
           style={{ 
             width: `${Math.cos((i - 3) * 25 * Math.PI / 180) * 100}%`,
             height: `${Math.cos((i - 3) * 25 * Math.PI / 180) * 100}%`,
-            transform: `translate(-50%, -50%) rotateX(90deg) translateZ(${Math.sin((i - 3) * 25 * Math.PI / 180) * 250}px)`
+            transform: `translate(-50%, -50%) rotateX(90deg) translateZ(${Math.sin((i - 3) * 25 * Math.PI / 180) * (reduced ? 160 : 250)}px)`
           }}
         />
       ))}
@@ -68,6 +69,19 @@ const DigitalGlobe = () => (
 );
 
 export function HomeScreen() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 640px)');
+    const handle = () => setIsMobile(mq.matches);
+    handle();
+    mq.addEventListener?.('change', handle);
+    window.addEventListener('resize', handle);
+    return () => {
+      mq.removeEventListener?.('change', handle);
+      window.removeEventListener('resize', handle);
+    };
+  }, []);
   return (
       <motion.div
         initial={{ opacity: 0 }}
@@ -76,8 +90,8 @@ export function HomeScreen() {
         transition={{ duration: 0.8, delay: 0.1 }}
         className="relative z-10 w-full overflow-hidden min-h-[calc(100vh-80px)] pt-20 pb-12"
       >
-        <FloatingIcons />
-        <DigitalGlobe />
+        <FloatingIcons reduced={isMobile} />
+        <DigitalGlobe reduced={isMobile} />
 
         <div className="relative z-20 max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -109,7 +123,7 @@ export function HomeScreen() {
             {/* Right: Blobs / visual */}
             <div className="relative w-full h-96 md:h-[480px] lg:h-[560px] flex items-center justify-center pointer-events-none">
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative w-full h-full">
+                <div className="relative w-full h-full hero-blobs">
                   {/* colorful blobs generated with layered divs */}
                   <div className="absolute right-6 top-8 w-64 h-40 md:w-96 md:h-56 rounded-full bg-gradient-to-r from-pink-500 via-violet-500 to-cyan-400 opacity-90 blur-[36px] transform rotate-6" />
                   <div className="absolute right-24 top-40 w-44 h-28 md:w-72 md:h-44 rounded-full bg-gradient-to-r from-cyan-300 via-sky-500 to-fuchsia-500 opacity-95 blur-[30px] transform rotate-12" />

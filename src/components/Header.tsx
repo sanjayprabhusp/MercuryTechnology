@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { ScreenName } from '../types';
 import { Zap } from 'lucide-react';
@@ -24,6 +24,7 @@ export function Header({
   currentScreen,
   onNavigate,
 }: HeaderProps) {
+  const [mobileOpen, setMobileOpen] = useState(false);
   return (
     <motion.header
       initial={{
@@ -83,7 +84,7 @@ export function Header({
             items-center
             gap-3
             shrink-0
-            "
+           "
           >
             <div
               className="
@@ -149,6 +150,7 @@ export function Header({
 
               return (
                 <motion.button
+                  layout
                   key={tab.id}
                   whileHover={{
                     y: -1,
@@ -188,6 +190,7 @@ export function Header({
                   {active && (
                     <motion.div
                       layoutId="navActive"
+                      transition={{ type: 'spring', stiffness: 450, damping: 40 }}
                       className="
                       absolute
                       bottom-0
@@ -204,7 +207,54 @@ export function Header({
             })}
           </nav>
 
+          {/* Mobile menu button (only on small screens) */}
+          <div className="flex items-center gap-3">
+            {/* replace plain hamburger with three-element logo button on mobile */}
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setMobileOpen(true)}
+              aria-label="Open navigation"
+              className="md:hidden inline-flex items-center justify-center p-2 rounded-lg bg-white/5"
+            >
+              <div className="flex flex-col items-center gap-1">
+                <div className="w-4 h-4 rounded-full bg-gradient-to-br from-pink-400 to-cyan-400 shadow-sm" />
+                <div className="w-4 h-4 rounded-full bg-gradient-to-br from-violet-500 to-sky-400 shadow-sm" />
+                <div className="w-4 h-4 rounded-full bg-gradient-to-br from-cyan-300 to-indigo-500 shadow-sm" />
+              </div>
+            </motion.button>
+          </div>
+
         </div>
+        {/* Mobile slide-out nav */}
+        {mobileOpen && (
+          <motion.aside
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            className="fixed top-0 right-0 bottom-0 z-50 w-72 bg-slate-900/95 backdrop-blur-lg p-6 md:hidden"
+          >
+            <div className="flex items-center justify-between">
+              <div className="text-lg font-bold text-white">Menu</div>
+              <button onClick={() => setMobileOpen(false)} aria-label="Close menu" className="text-white text-2xl leading-none">×</button>
+            </div>
+
+            <nav className="mt-6 flex flex-col gap-3">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => {
+                    onNavigate(tab.id);
+                    setMobileOpen(false);
+                  }}
+                  className="text-left px-3 py-3 rounded-lg text-white/90 hover:bg-white/5 transition"
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </nav>
+          </motion.aside>
+        )}
       </div>
     </motion.header>
   );

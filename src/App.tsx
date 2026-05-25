@@ -22,7 +22,7 @@ export default function App() {
           }
         });
       },
-      { threshold: 0.2, rootMargin: "-10% 0px -40% 0px" }
+      { threshold: 0.35, rootMargin: "-15% 0px -45% 0px" }
     );
 
     const sections = document.querySelectorAll('section');
@@ -37,9 +37,7 @@ export default function App() {
     setCurrentScreen(screen);
     const section = document.getElementById(screen);
     if (!section) return;
-    const headerOffset = 92;
-    const top = section.getBoundingClientRect().top + window.scrollY - headerOffset;
-    window.scrollTo({ top, behavior: 'smooth' });
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (

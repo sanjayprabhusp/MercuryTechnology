@@ -13,10 +13,30 @@ html, body, #root {
   min-height: 100%;
   background: radial-gradient(circle at top, rgba(56,189,248,0.08), transparent 30%), #07172d;
   color: #e2e8f0;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
 }
 
 body {
   margin: 0;
   font-family: var(--font-sans);
   background-color: #07172d;
+}
+
+section {
+  scroll-margin-top: 92px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+@media (max-width: 640px) {
+  /* Reduce heavy blurs and large visuals on mobile to improve performance */
+  .hero-blobs > div {
+    filter: blur(12px) !important;
+    opacity: 0.9 !important;
+  }
+
+  .blur-3xl {
+    filter: blur(12px) !important;
+  }
 }
