@@ -23,6 +23,7 @@
     "postprocessing": "^6.39.1",
     "react": "^19.0.1",
     "react-dom": "^19.0.1",
+    "react-lazy-load-image-component": "^1.6.3",
     "three": "^0.184.0"
   },
   "devDependencies": {
