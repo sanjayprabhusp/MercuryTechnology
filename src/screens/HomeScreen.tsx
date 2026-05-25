@@ -103,15 +103,7 @@ export function HomeScreen() {
                 Crafting innovative technology solutions that transform businesses and elevate user experiences.
               </motion.p>
 
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.9, delay: 0.3, ease: 'easeInOut' }}
-                className="mt-8"
-              >
-                <GlowButton className="px-6 py-3 rounded-lg border-2 border-sky-400/80 text-sky-200 bg-transparent">About Us</GlowButton>
-              </motion.div>
+              {/* About button intentionally removed from homepage per request */}
             </div>
 
             {/* Right: Blobs / visual */}
